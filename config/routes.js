@@ -32,15 +32,16 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    controller: 'DesireController',
-    action: 'index'
-  },
+  'post /user/register': 'UsersController.register'
+  // '/': {
+  //   controller: 'DesireController',
+  //   action: 'index'
+  // },
 
-  '/show': {
-    controller: 'DesireController',
-    action: 'show'
-  }
+  // '/show': {
+  //   controller: 'DesireController',
+  //   action: 'show'
+  // }
 
   /***************************************************************************
   *                                                                          *

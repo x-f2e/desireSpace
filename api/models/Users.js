@@ -15,7 +15,7 @@ var bcrypt = require("bcrypt");
  * @param   {Function}           next
  */
 function hashPassword(user, next) {
-    bcrypt.hash(values.password, 10, function(error, hash) {
+    bcrypt.hash(user.password, 10, function(error, hash) {
         if (error) {
             sails.log.error(__filename + ":" + __line + " [Password hashing failed]");
             sails.log.error(error);
@@ -38,15 +38,18 @@ module.exports = {
       primaryKey: true
     },
     name: {
-      type: 'tring',
-      unique: true
+      type: 'string',
+      unique: true,
+      required: true
     },
     password: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     email: {
       type: 'email',
-      unique: true
+      unique: true,
+      required: true
     },
 
     // Override toJSON instance method to remove password value

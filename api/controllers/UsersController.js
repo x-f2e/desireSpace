@@ -75,41 +75,52 @@ module.exports = {
 
     // 判断用户输入的用户名和email是否已经存在
     // TODO: 应该把验证流程改的更清晰
-    async.series(
-      {
-        name: function(callback){
-          UserService.isUserExist({name: name}, callback);
-        },
-        email: function(callback){
-          UserService.isUserExist({email: email}, callback);
-        }
+    async.series([
+      function(callback){
+        // 验证用户名是否存在
+        UserService.isUserExist({name: name}, function(err, isExist){
+          if (err) {
+            callback(err, 500);
+          }
+          else if (isExist){
+            callback("用户名已经存在！", 400);
+          }
+          else {
+            callback(null, false);
+          }
+        });
       },
-
-      function(err, results){
-        if (err){
-          return res.json(500, {error: err});
-        } else {
-          var errString = '',
-              statusCode = 200;
-          if (results.name) {
-            errString += '用户名已经存在！';
+      function(arg1, callback){
+        // 验证email是否存在
+        UserService.isUserExist({email: email}, function(err, isExist){
+          if (err) {
+            callback(err, 500);
           }
-          if (results.email) {
-            errString += 'email已经存在！';
+          else if (isExist){
+            callback("email已经存在！", 400);
           }
-
-          if (errString){
-            return res.json(statusCode, {error: errString});
+          else {
+            callback(null, false);
           }
-          UserService.createUser(user, function(err, created){
-            if (err){
-              return res.json(500, {error: err});
-            }
-            return res.json(200, {});
-          });
-        }
+        });
       }
-    );
+    ], function(err, results){
+      // 只要有一个错误或者数据库查询错误返回给客服端
+      if (err && results == 500){
+        return res.json(500, {error: err});
+      }
+      else if(err) {
+        return res.json(400, {error: err});
+      }
+      else {
+        UserService.createUser(user, function(err, created){
+          if (err){
+            return res.json(500, {error: err});
+          }
+          return res.json(200, {});
+        });
+      }
+    });
   }
 };
 

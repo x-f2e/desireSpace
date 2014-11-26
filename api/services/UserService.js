@@ -16,9 +16,8 @@ exports.getOneUser = function(where, next){
     .exec(function(err, user){
       if (err){
         sails.log.error(__filename + ":" + __line + " [获取用户数据失败]");
-        sails.log.error(error);
+        sails.log.error(err);
       }
-
       next(err, user);
     });
 };
@@ -52,9 +51,8 @@ exports.createUser = function(user, next){
     .exec(function(err, created){
       if (err){
         sails.log.error(__filename + ":" + __line + " [创建用户失败]");
-        sails.log.error(error);
+        sails.log.error(err);
       }
       next(err, created);
     });
 }
-

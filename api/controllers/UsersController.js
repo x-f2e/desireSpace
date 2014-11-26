@@ -55,7 +55,7 @@ module.exports = {
     rest: false    // 关闭自动生成的rest 路由
   },
 
-
+  // TODO 注册后增加登陆session,新用户注册后即是登陆状态
   register: function(req, res){
     var name = req.param('name', ''),
         password = req.param('password', ''),
@@ -74,8 +74,7 @@ module.exports = {
     }
 
     // 判断用户输入的用户名和email是否已经存在
-    // TODO: 应该把验证流程改的更清晰
-    async.series([
+    async.waterfall([
       function(callback){
         // 验证用户名是否存在
         UserService.isUserExist({name: name}, function(err, isExist){

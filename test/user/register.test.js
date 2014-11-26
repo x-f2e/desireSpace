@@ -5,6 +5,8 @@ var request = require("supertest");
 var sailsHelper = require("./../helpers/sailsHelper");
 var sails;
 
+// TODO 添加测试前后重置数据库的操作
+
 before(function(done) {
     sailsHelper.build(function(error, _sails) {
         if (error || !_sails) {

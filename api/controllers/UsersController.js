@@ -120,6 +120,12 @@ module.exports = {
         });
       }
     });
+  },
+
+  // 用户登陆函数，登陆成功就建立session
+  login:function(req, res){
+    var name = req.param('name', '');
+    var password = req.param('password', '');
   }
 };
 

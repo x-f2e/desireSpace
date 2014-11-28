@@ -31,7 +31,8 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
+  '/' : 'HomeController.index',
+  'post /user/login': 'UsersController.login',
   'post /user/register': 'UsersController.register'
   // '/': {
   //   controller: 'DesireController',

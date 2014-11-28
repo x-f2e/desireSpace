@@ -126,6 +126,12 @@ module.exports = {
   login:function(req, res){
     var name = req.param('name', '');
     var password = req.param('password', '');
+
+    var loginWhere = {
+      name: name,
+      password: password
+    }
+    UserService.isUserExist()
   }
 };
 

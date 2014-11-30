@@ -120,6 +120,35 @@ module.exports = {
         });
       }
     });
+  },
+
+  // 用户登陆函数，登陆成功就建立session
+  login:function(req, res){
+    var name = req.param('name', '');
+    var password = req.param('password', '');
+
+    var loginWhere = {
+      name: name
+    }
+    if (!name){
+      return res.json(400, {error: "请输入用户名！"});
+    }
+    if (!password){
+      return res.json(400, {error: "请输入密码！"});
+    }
+    UserService.isUserExist(loginWhere, function(err, isExist, user){
+      if (err){
+        return res.json(500, {error: err});
+      }
+      else if (!isExist || !(user.validPassword(password))){
+        return res.json(400, {error: "用户名或密码错误！"});
+      }
+
+      // 成功登陆的情况
+      req.session.user = user;
+      return res.json(200, {});
+
+    })
   }
 };
 

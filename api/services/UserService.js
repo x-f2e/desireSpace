@@ -25,14 +25,16 @@ exports.getOneUser = function(where, next){
 /**
  * 根据查询条件确定一个用户是否存在
  * @param  {[type]}   where
- * @param  {Function} next
+ * @param  {Function} next 第一个参数是错误信息，
+ *                         第二参数是用户是否存在，
+ *                         如果用户存在，第三个参数返回用户
  * @return {Boolean}
  */
 exports.isUserExist = function(where, next){
   sails.log.debug(where);
   UserService.getOneUser(where, function(err, user){
     if (user){
-      next(err, true);
+      next(err, true, user);
     } else {
       next(err, false);
     }

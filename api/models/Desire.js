@@ -8,26 +8,7 @@
 module.exports = {
 
   attributes: {
-    id: {
-      type: 'integer',
-      unique: true,
-      primaryKey: true
-    },
-    start_time: {
-      type: 'datetime'
-    },
-    end_time: {
-      type: 'datetime'
-    },
-    date: {
-      type: 'date'
-    },
-    msg: {
-      type: 'text'
-    },
-    mood: {
-      type: 'string'
-    }
+
   }
 };
 

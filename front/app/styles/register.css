@@ -12,32 +12,47 @@
   color: #ffffff;
 }
 
+.main {
+  width: 100%;
+  padding-top: 10%;
+  margin: 0 auto;
+}
+
 .logo {
-  width: 60px;
+  width: 30%;
 }
 
 .reg_from {
-  margin-top: 20px;
+  margin-top: 10%;
 }
 
 .reg_from input {
   display: block;
-  border-radius: 5px;
+  /*border-radius: 7px;*/
   margin: 0 auto;
-  margin-top: 10px;
+  margin-top: 5%;
   height: 30px;
-  padding-left: 4px;
-  width: 200px;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 2px 2px 2px 5px;
+  width: 70%;
 }
 
 .submit {
-  width: 200px;
-  height: 30px;
+  width: 70%;
+  height: 40px;
   background-color: #fe90aa;
   margin: 0 auto;
-  margin-top: 15px;
-  line-height: 30px;
+  margin-top: 5%;
+  font-size: 22px;
+  line-height: 40px;
 }
-#myCanvas {
-  margin-top: 10px;
+.pasword_canvas {
+  margin-top: 5%;
+}
+
+@media screen and (min-width: 640px) {
+  .main {
+    width: 640px;
+  }
 }

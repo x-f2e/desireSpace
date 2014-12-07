@@ -140,8 +140,11 @@ module.exports = {
       if (err){
         return res.json(500, {error: err});
       }
-      else if (!isExist || !(user.validPassword(password))){
-        return res.json(400, {error: "用户名或密码错误！"});
+      if (!isExist){
+        return res.json(400, {error: "用户名不存在"});
+      }
+      else if (!(user.validPassword(password))){
+        return res.json(400, {error: "密码错误！"});
       }
 
       // 成功登陆的情况

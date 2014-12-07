@@ -33,7 +33,12 @@ module.exports.routes = {
   ***************************************************************************/
   '/' : 'HomeController.index',
   'post /user/login': 'UsersController.login',
-  'post /user/register': 'UsersController.register'
+  'post /user/register': 'UsersController.register',
+
+  // ================= test ===============
+  '/desire': 'DesireController.create'
+  // ================= test end ===========
+
   // '/': {
   //   controller: 'DesireController',
   //   action: 'index'

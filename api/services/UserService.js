@@ -52,7 +52,7 @@ exports.createUser = function(user, next){
     .create(user)
     .exec(function(err, created){
       if (err){
-        sails.log.error(__filename + ":" + __line + " [创建用户失败]");
+        sails.log.error(__filename + ":" + " [创建用户失败]");
         sails.log.error(err);
       }
       next(err, created);

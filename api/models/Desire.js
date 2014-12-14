@@ -30,7 +30,7 @@ module.exports = {
 
     // 创建的时间
     create_time: {
-      type: 'timestamp',
+      type: 'datetime',
       index: true
     },
 
@@ -54,9 +54,9 @@ module.exports = {
    * @return {[type]}          [description]
    */
   beforeCreate: function(desire, next) {
-    var time = new Date();
+    var _now = new Date();
     console.log(time.getTime());
-    desire.create_time = time.getTime();
+    desire.create_time = _now;
     next();
   },
 };

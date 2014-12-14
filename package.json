@@ -34,7 +34,7 @@
     "start": "node app.js",
     "debug": "node debug app.js",
     "test": "node ./node_modules/mocha/bin/mocha",
-    "dev": "supervisor -w api/. app.js"
+    "watch": "supervisor -w api/. app.js"
   },
   "main": "app.js",
   "repository": {

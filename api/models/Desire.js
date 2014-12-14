@@ -28,11 +28,36 @@ module.exports = {
       model: 'DesireRecord'
     },
 
+    // 创建的时间
+    create_time: {
+      type: 'timestamp',
+      index: true
+    },
+
+    // 结束时间
+    end_time: {
+      type: 'datetime',
+      index: true
+    },
+
     // 被多少人标记星
     star: 'integer',
     // 标记是否结束
     isEnd: 'boolean'
 
-  }
+  },
+
+  /**
+   * [beforeCreate description]
+   * @param  {[type]}   desire [description]
+   * @param  {Function} next   [description]
+   * @return {[type]}          [description]
+   */
+  beforeCreate: function(desire, next) {
+    var time = new Date();
+    console.log(time.getTime());
+    desire.create_time = time.getTime();
+    next();
+  },
 };
 

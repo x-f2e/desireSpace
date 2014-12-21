@@ -3,6 +3,7 @@
  * 关于Users上的数据操作
  */
 
+var uuid = require('uuid');
 
 /**
  * 根据查询的条件获得一个用户
@@ -56,5 +57,38 @@ exports.createUser = function(user, next){
         sails.log.error(err);
       }
       next(err, created);
+    });
+}
+
+/**
+ * 新建一个Token并保存下来，而且把token返回给调用者
+ * @param  {[type]} user [description]
+ * @return {[type]}      [description]
+ */
+exports.createToken = function(user, next) {
+  // 使用uuid和user.id来产生token
+  var token = uuid.v4({
+    clockseq: (user.id % 0x3ffff)
+  });
+
+  // 开始查询一个UsersInfo是否存在，如果不存在就新建
+  // 接着就把token更新到数据库里
+  UsersInfo
+    .find({user: user.id}, {user: user.id})
+    .exec(function createUsersInfo(err, UsersInfo){
+      if (err){
+        next(err, null);
+      }
+      else {
+        UsersInfo
+          .update({user: user.id}, {token: token})
+          .exec(function(err, UsersInfo){
+            if (err){
+              sails.log.error(__filename + ":" + " [新建token失败]");
+              sails.log.error(err);
+            }
+            next(err, token);
+          });
+      }
     });
 }

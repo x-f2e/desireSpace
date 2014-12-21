@@ -146,15 +146,24 @@ module.exports = {
         return res.json(500, {error: err});
       }
       if (!isExist){
-        return res.json(400, {error: "用户名不存在"});
+        return res.json(400, {error: "用户名不存在！"});
       }
       else if (!(user.validPassword(password))){
         return res.json(400, {error: "密码错误！"});
       }
 
-      // 成功登陆的情况
+      // 成功登陆的情况, 客服端设置token。
       req.session.user = user;
-      return res.json(200, {});
+      UserService.createToken(user, function(err, token){
+        if (err){
+          return res.json(500, {error: "生成token错误！"});
+        }
+        else{
+          return res.json(200, {token: token});
+        }
+      })
+
+
 
     })
   }

@@ -1,5 +1,6 @@
 "use strict";
 
+var uuid = require('uuid');
 var should = require('should');
 var request = require("supertest");
 var sailsHelper = require("./../helpers/sailsHelper");
@@ -27,7 +28,7 @@ describe('test for user register', function() {
     var regData = {
       name: 'mp',
       password: 'password',
-      email: 'mpr0xy@live.com'
+      email: uuid.v4().substring(0, 5) + '_mpr0xy@live.com'
     }
 
     describe('with name length is less than 4', function(){
@@ -116,8 +117,9 @@ describe('test for user register', function() {
 
     describe('with valid register data', function(){
       it('should return 200 page with NO error msg', function(done){
+        regData.name = 'mp_' + uuid.v4().substring(0, 5);
         regData.password = 'my_password';
-        regData.email = 'mpr0xy@live.com';
+        regData.email = uuid.v4().substring(0, 5) + '_mpr0xy@live.com';
         request(sails.getBaseurl())
           .post('/user/register')
           .send(regData)
@@ -127,7 +129,7 @@ describe('test for user register', function() {
             should.exist(result);
             console.info(result.body);
             done();
-          })
+          });
       })
     });
 

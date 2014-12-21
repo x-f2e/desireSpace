@@ -13,7 +13,7 @@ module.exports = {
       model: 'Users'
     },
 
-    // 用户的性别，true是男, false是女，空是其他
+    // 用户的性别，false是男, true是女，空是其他
     gender: 'boolean',
 
     // 用户登陆后存放在客户端的token

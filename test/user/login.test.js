@@ -29,7 +29,7 @@ before(function(done) {
 
 describe('test user login', function() {
 
-  before(function(before_done){
+  before(function(done){
     // 注册一个用户先，这样才能测试登陆
     request(sails.getBaseurl())
         .post('/user/register')
@@ -39,7 +39,7 @@ describe('test user login', function() {
           should.not.exist(err);
           should.exist(result);
           console.info(result.body);
-          done();
+          return done();
         });
   });
 

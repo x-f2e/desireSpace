@@ -29,7 +29,7 @@ describe('test for user register', function() {
       name: 'mp',
       password: 'password',
       email: uuid.v4().substring(0, 5) + '_mpr0xy@live.com'
-    }
+    };
 
     describe('with name length is less than 4', function(){
       it('should return 400 page with error msg', function(done){
@@ -44,7 +44,7 @@ describe('test for user register', function() {
             done();
           })
       })
-    })
+    });
 
     describe('with name length is more than 16', function(){
       it('should return 400 page with error msg', function(done){
@@ -134,4 +134,4 @@ describe('test for user register', function() {
     });
 
   })
-})
+});

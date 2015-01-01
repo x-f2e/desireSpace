@@ -40,7 +40,7 @@ exports.isUserExist = function(where, next){
       next(err, false);
     }
   });
-}
+};
 
 /**
  * 用来创建用户
@@ -58,11 +58,12 @@ exports.createUser = function(user, next){
       }
       next(err, created);
     });
-}
+};
 
 /**
  * 新建一个Token并保存下来，而且把token返回给调用者
  * @param  {[type]} user [description]
+ * @param  {function} next 回调函数
  * @return {[type]}      [description]
  */
 exports.createToken = function(user, next) {
@@ -74,15 +75,15 @@ exports.createToken = function(user, next) {
   // 开始查询一个UsersInfo是否存在，如果不存在就新建
   // 接着就把token更新到数据库里
   UsersInfo
-    .find({user: user.id}, {user: user.id})
-    .exec(function createUsersInfo(err, UsersInfo){
+    .findOrCreate({user: user.id}, {user: user.id})
+    .exec(function createUsersInfo(err){
       if (err){
         next(err, null);
       }
       else {
         UsersInfo
           .update({user: user.id}, {token: token})
-          .exec(function(err, UsersInfo){
+          .exec(function (err){
             if (err){
               sails.log.error(__filename + ":" + " [新建token失败]");
               sails.log.error(err);
@@ -91,4 +92,4 @@ exports.createToken = function(user, next) {
           });
       }
     });
-}
+};

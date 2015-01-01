@@ -19,9 +19,9 @@ global.lifted = lifted;
  * @type {{}}
  */
 var sailsTestConfig = {
-    log: {
-        level: null
-    }
+    //log: {
+    //    level: null
+    //}
 };
 
 /**

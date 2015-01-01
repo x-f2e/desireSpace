@@ -14,7 +14,7 @@ var async = require("async");
 
 /**
  * 验证一个用户的数据是否正确
- * @param  {sails.model.Users}  user
+ * @param  {sails.models.Users}  user
  * @return {{
  *          isValidate: Boolean,
  *          msg: String,
@@ -25,7 +25,7 @@ function isValidateUser(user){
   var result = {
     isValidate: false,
     msg: ''
-  }
+  };
   if (!validator.isLength(user.name, 4, 16)){
     result.msg = '用户名应该不少于4位字符且不大于16位字符！';
     return result;
@@ -65,7 +65,7 @@ module.exports = {
       name: name,
       password: password,
       email: email
-    }
+    };
 
     // 验证用户输入的注册数据是否合法
     validateResult = isValidateUser(user);
@@ -128,13 +128,13 @@ module.exports = {
    * @param  {[type]} res [description]
    * @return {[type]}     [description]
    */
-  login:function(req, res){
+  login: function(req, res){
     var name = req.param('name', '');
     var password = req.param('password', '');
 
     var loginWhere = {
       name: name
-    }
+    };
     if (!name){
       return res.json(400, {error: "请输入用户名！"});
     }
@@ -162,9 +162,6 @@ module.exports = {
           return res.json(200, {token: token});
         }
       })
-
-
-
     })
   }
 };
